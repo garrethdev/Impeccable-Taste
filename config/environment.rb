@@ -7,7 +7,10 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
 require 'rubygems'
+require 'themoviedb'
+require 'json'
 
+require 'yaml'
 require 'uri'
 require 'pathname'
 
@@ -36,6 +39,10 @@ configure do
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end
+
+secrets = YAML.load_file('config/secret.yaml')
+Tmdb::Api.key(secrets["API_KEY"])
+
 
 # Set up the controllers and helpers
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
