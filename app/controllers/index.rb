@@ -35,10 +35,10 @@ post '/actors' do
 
   @actors.each do |element|
     unless @first_actor == element.name
-      p movie_rating(@first_actor)
+      movie_rating(@first_actor)
     end
     unless @second_actor == element.name
-      p movie_rating(@second_actor)
+      movie_rating(@second_actor)
     end
   end
   redirect '/'
