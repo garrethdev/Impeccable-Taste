@@ -7,6 +7,10 @@ class TablesForDatabase < ActiveRecord::Migration
     create_table(:users) do |t|
       t.string :oauth_token
       t.integer :oauth_secret
+      t.string :facebook_id
+      t.string :first_name
+      t.string :last_name
+      t.string :link
       t.string :username
     end
     create_table(:fightscenes) do |t|
