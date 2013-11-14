@@ -4,7 +4,6 @@ get '/' do
 
   if session['access_token']
     'You are logged in! <a href="/logout">Logout</a>'
-    # @actors = Actor.all
      erb :index
   else
     '<a href="/login">Login</a>'
@@ -33,14 +32,14 @@ post '/actors' do
   @first_actor = params[:firstactor]
   @second_actor = params[:secondactor]
   @actors = Actor.all
-
   @actors.each do |element|
     unless @first_actor == element.name
-      movie_rating(@first_actor)
+      @actor_avg1 = movie_rating(@first_actor)
     end
     unless @second_actor == element.name
-      movie_rating(@second_actor)
+      @actor_avg2 = movie_rating(@second_actor)
     end
   end
-  redirect '/'
+  erb :index
+  @winner =  win(@actor_avg1, @actor_avg2, @first_actor, @second_actor) + " is the winner"
 end
