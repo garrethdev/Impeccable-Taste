@@ -41,4 +41,5 @@ post '/actors' do
       p movie_rating(@second_actor)
     end
   end
+  redirect '/'
 end
