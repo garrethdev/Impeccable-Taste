@@ -18,12 +18,21 @@ require 'logger'
 require 'sinatra'
 require "sinatra/reloader" if development?
 
+require 'koala'
 require 'erb'
+require 'yaml'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
+
+env_config = YAML.load_file(APP_ROOT.join('config', 'facebook.yml'))
+env_config.each do |key, value|
+  ENV[key] = value
+end
+
+
 
 configure do
   # By default, Sinatra assumes that the root is the file that calls the configure block.
@@ -31,7 +40,9 @@ configure do
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
-  set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
+  # use Rack::Session::Cookie, secret: 'weifjw9eif29j34f0923f02wfokwjflnrgoi3h'
+  set :secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhhh'
+
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
@@ -43,3 +54,5 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+
