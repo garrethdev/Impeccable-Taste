@@ -1,9 +1,15 @@
+require_relative '../helpers/movie_rating_api'
+# require_relative 'movie_rating_api'
 get '/' do
+
   if session['access_token']
     'You are logged in! <a href="/logout">Logout</a>'
+    @actors = Actor.all
   else
     '<a href="/login">Login</a>'
   end
+
+  erb :index
 end
 
 get '/login' do
@@ -19,5 +25,21 @@ end
 
 get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
+  redirect '/'
+end
+
+post '/actors' do
+  @first_actor = params[:firstactor]
+  @second_actor = params[:secondactor]
+  @actors = Actor.all
+
+  @actors.each do |element|
+    unless @first_actor == element.name
+      movie_rating(@first_actor)
+    end
+    unless @second_actor == element.name
+      movie_rating(@second_actor)
+    end
+  end
   redirect '/'
 end

@@ -3,9 +3,7 @@ require 'json'
 
 require 'yaml'
 
-secrets = YAML.load_file('secret.yaml')
 
-Tmdb::Api.key(secrets["API_KEY"])
 
 # Example:
 
