@@ -1,8 +1,24 @@
 require_relative '../helpers/movie_rating_api'
+require "net/http"
+require "net/https"
+require "cgi"
+require "json"
 # require_relative 'movie_rating_api'
 get '/' do
 
   if session['access_token']
+    # The following lines get basic user info including ID.
+    http = Net::HTTP.new "graph.facebook.com", 443
+    request = Net::HTTP::Get.new "/me?access_token=#{session['access_token']}"
+    http.use_ssl = true
+    response = http.request request
+    @json = JSON.parse(response.body)
+
+    # If the facebook user id doesn't exist in the database, then add that user
+    if User.exists?(:facebook_id => @json['id']) == false
+      User.create facebook_id: @json['id'], first_name: @json['first_name'], last_name: @json['last_name'], username: @json['username'], link: @json['link'], oauth_token: session['access_token'], oauth_secret: "some secret" 
+    end
+
     'You are logged in! <a href="/logout">Logout</a>'
     # @actors = Actor.all
      erb :index
