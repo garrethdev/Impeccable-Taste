@@ -1,8 +1,31 @@
 require_relative '../helpers/movie_rating_api'
 # require_relative 'movie_rating_api'
 get '/' do
-  @actors = Actor.all
+
+  if session['access_token']
+    'You are logged in! <a href="/logout">Logout</a>'
+    @actors = Actor.all
+  else
+    '<a href="/login">Login</a>'
+  end
+
   erb :index
+end
+
+get '/login' do
+  session['oauth'] = Koala::Facebook::OAuth.new(ENV['APP_ID'], ENV['APP_SECRET'], "#{request.base_url}/callback")
+  redirect session['oauth'].url_for_oauth_code()
+end
+
+get '/logout' do
+  session['oauth'] = nil
+  session['access_token'] = nil
+  redirect '/'
+end
+
+get '/callback' do
+  session['access_token'] = session['oauth'].get_access_token(params[:code])
+  redirect '/'
 end
 
 post '/actors' do
