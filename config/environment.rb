@@ -38,14 +38,9 @@ end
 
 
 configure do
-  # By default, Sinatra assumes that the root is the file that calls the configure block.
-  # Since this is not the case for us, we set it manually.
   set :root, APP_ROOT.to_path
-  # See: http://www.sinatrarb.com/faq.html#sessions
-  enable :sessions
-  # use Rack::Session::Cookie, secret: 'weifjw9eif29j34f0923f02wfokwjflnrgoi3h'
-  set :secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhhh'
 
+  use Rack::Session::Cookie, secret: ENV['SESSION_SECRET']
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")

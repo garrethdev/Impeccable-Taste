@@ -4,12 +4,12 @@ get '/' do
 
   if session['access_token']
     'You are logged in! <a href="/logout">Logout</a>'
-    @actors = Actor.all
+    # @actors = Actor.all
+     erb :index
   else
     '<a href="/login">Login</a>'
   end
 
-  erb :index
 end
 
 get '/login' do
@@ -19,6 +19,7 @@ end
 
 get '/logout' do
   session['oauth'] = nil
+  p session['access_token']
   session['access_token'] = nil
   redirect '/'
 end
