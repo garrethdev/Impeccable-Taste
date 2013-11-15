@@ -48,14 +48,12 @@ post '/actors' do
   @first_actor = params[:firstactor]
   @second_actor = params[:secondactor]
   @actors = Actor.all
-  @actors.each do |element|
-    unless @first_actor == element.name
-      @actor_avg1 = movie_rating(@first_actor)
-    end
-    unless @second_actor == element.name
-      @actor_avg2 = movie_rating(@second_actor)
-    end
-  end
-  erb :index
+
+  @actor_avg1 = movie_rating(@first_actor)
+  @actor_avg2 = movie_rating(@second_actor)
+  
+  # erb :index
+  p @actor_avg1
+
   @winner =  win(@actor_avg1, @actor_avg2, @first_actor, @second_actor) + " is the winner"
 end
