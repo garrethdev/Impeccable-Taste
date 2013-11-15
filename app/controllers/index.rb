@@ -45,17 +45,19 @@ get '/callback' do
 end
 
 post '/actors' do
-  @first_actor = params[:firstactor]
-  @second_actor = params[:secondactor]
+  @first_actor_name = params[:firstactor]
+  @second_actor_name = params[:secondactor]
   @actors = Actor.all
-  @actors.each do |element|
-    unless @first_actor == element.name
-      @actor_avg1 = movie_rating(@first_actor)
-    end
-    unless @second_actor == element.name
-      @actor_avg2 = movie_rating(@second_actor)
-    end
-  end
+
+  # Cache an actor if it does not exist in the database.
+  cache_actor(@first_actor_name); cache_actor(@second_actor_name)
+
+  @first_actor = Actor.find_by_name(@first_actor_name)
+  @second_actor = Actor.find_by_name(@second_actor_name)
+
+  @actor_avg1 = @first_actor.avg_rating
+  @actor_avg2 = @second_actor.avg_rating
+
   erb :index
-  @winner =  win(@actor_avg1, @actor_avg2, @first_actor, @second_actor) + " is the winner"
+  @winner =  win(@actor_avg1, @actor_avg2, @first_actor_name, @second_actor_name) + " is the winner"
 end
