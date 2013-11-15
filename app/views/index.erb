@@ -1,4 +1,3 @@
-
 <div class="container">  
   <div id = "content">
     <div id = "video">
@@ -10,6 +9,12 @@
         <input type="text" placeholder="Choose your 2nd Actor" name = "secondactor"required="">
         <button type="submit">Submit</button>
       </form>
+      <div id="recent_fights">
+        <h3> Recent Fights: </h3>
+        <% Fight.order(:updated_at).limit(10).reverse.each do |fight| %>
+          <a class="fight_link" href="#" firstactor="<%= fight.first_actor.to_s %>" secondactor="<%= fight.second_actor.to_s %>"><%= "#{fight.first_actor} vs #{fight.second_actor}" %></a><br /><br />
+      <% end %>
+      </div>
     </div>
     <h1 id="winner"></h1>
   </div>

@@ -48,8 +48,8 @@ post '/actors' do
   # Cache an actor if it does not exist in the database.
   cache_actor(params[:firstactor]); cache_actor(params[:secondactor])
 
-  @first_actor = Actor.find_by_name(params[:firstactor])
-  @second_actor = Actor.find_by_name(params[:secondactor])
+  @first_actor = Actor.find_by_name_lowercase(params[:firstactor].downcase)
+  @second_actor = Actor.find_by_name_lowercase(params[:secondactor].downcase)
 
   # Create fight if it doesn't exist in the database.
   cache_fight(@first_actor, @second_actor)

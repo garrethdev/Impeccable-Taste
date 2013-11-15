@@ -10,7 +10,7 @@ helpers do
     movie_rating = movie_id.take(15).map { |mov| Tmdb::Movie.detail(mov).vote_average }
     avg_score = movie_rating.inject(:+)/movie_rating.length
 
-    return avg_score
+    avg_score
   end
 
   def cache_actor(actor_name)
@@ -35,7 +35,9 @@ helpers do
   end
 
   def win(first_actor, second_actor)
-    second_actor.avg_rating > first_actor.avg_rating ?  first_actor.name : second_actor.name
+    # second_actor.avg_rating > first_actor.avg_rating ?  first_actor.name : second_actor.name
+    return first_actor.name if first_actor.avg_rating > second_actor.avg_rating
+    return second_actor.name if second_actor.avg_rating > first_actor.avg_rating
   end
 
 end

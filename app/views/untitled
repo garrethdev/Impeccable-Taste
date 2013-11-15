@@ -1,0 +1,4 @@
+        <% trending = Fight.order(:updated_at).last(5).reverse %>
+        <% trending.each do |fight| %>
+          <%= "#{fight.first_actor} vs #{fight.second_actor}" %> <br />
+        <% end %>
