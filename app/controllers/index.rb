@@ -22,7 +22,7 @@ get '/' do
     'You are logged in! <a href="/logout">Logout</a>'
      erb :index
   else
-    '<a href="/login">Login</a>'
+    erb :login
   end
 
 end

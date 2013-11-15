@@ -2,12 +2,13 @@ body {
   background-image: url('../img/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  height: 120%;
   font-family: 'Varela Round', sans-serif;
   text-shadow: 2px 2px 3px #666;
 }
-header { 
+header {
   background-size: cover;
-  background-color: #34495e; 
+  background-color: #34495e;
   color: white;
   font-size: 60px;
   height: 80px;
@@ -26,13 +27,13 @@ header: h1:first-child {
   font-weight:bold;
 }
 
-a {
+#logout {
   font-size: 30px;
   text-decoration: none;
   color: #06799f;
 }
 
-a:hover {
+#logout:hover {
   color: #bf7930;
 }
 
@@ -80,7 +81,7 @@ a:hover {
   overflow: visible;
   display: inline-block;
   color: #fff;
-  font: 1.4em sans-serif; 
+  font: 1.4em sans-serif;
   text-shadow: 0 -1px 0 rgba(0,0,0,.4);
   background-color: #2493ff;
   background-image: -webkit-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
@@ -107,8 +108,18 @@ a:hover {
 #video {
   position: relative;
   margin: 20px 0 0;
-  top: 250px;  
+  top: 250px;
 }
-#player { 
+#player {
   display:none;
+}
+#login_info {
+  font-size: 40px;
+  color: white;
+  font-family: 'Doppio One', sans-serif;
+}
+#login_link {
+  font-size: 40px;
+  color: white;
+  font-family: 'Doppio One', sans-serif;
 }
