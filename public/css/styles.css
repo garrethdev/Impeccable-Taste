@@ -8,17 +8,22 @@ body {
 header { 
   background-size: cover;
   background-color: #34495e; 
-  height: 100px;
+  color: white;
+  font-size: 60px;
+  height: 80px;
   opacity: .95;
   border-radius: 4px;
   box-shadow: 3px 3px 3px black;
-
-
+  top: 100px;
+  text-align: left;
 }
 
-h1:first-child {
+
+header: h1:first-child {
   font-size: 75px;
+  font-family: 'pf-din';
   color: #333;
+  font-weight:bold;
 }
 
 a {
@@ -37,12 +42,6 @@ a:hover {
   text-align: center;
 }
 
-#video {
-  position: relative;
-  margin: 20px 0 0;
-  top: 250px;
-  
-}
 
 #pick_actors {
   box-shadow: 6px 6px 6px black;
@@ -104,4 +103,12 @@ a:hover {
   top: 3px;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
+}
+#video {
+  position: relative;
+  margin: 20px 0 0;
+  top: 250px;  
+}
+#player { 
+  display:none;
 }
