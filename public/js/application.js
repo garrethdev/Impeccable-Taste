@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('form').on('submit', function(e) {
+  $('#pick_actors').on('submit', function(e) {
     e.preventDefault();
     var form_data = $(this).serialize();
     console.log(form_data)
@@ -10,6 +10,9 @@ $(document).ready(function() {
     }).done(function(server_data) {
       console.log(server_data)
       $('#winner').html(server_data);
+    }).fail(function() {
+      console.log('failed')
+      $('#winner').html('These people don\'t exist. Please enter some real actors.');
     });
   });
 });

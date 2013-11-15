@@ -49,11 +49,20 @@ post '/actors' do
   @second_actor = params[:secondactor]
   @actors = Actor.all
 
+
   @actor_avg1 = movie_rating(@first_actor)
   @actor_avg2 = movie_rating(@second_actor)
-  
-  # erb :index
+
+  puts "Actor Avg2"
+  @actor_avg2
+
+  puts "Actor Avg1"
   p @actor_avg1
 
+
+
   @winner =  win(@actor_avg1, @actor_avg2, @first_actor, @second_actor) + " is the winner"
+
+  puts "Winner"
+  @winner
 end

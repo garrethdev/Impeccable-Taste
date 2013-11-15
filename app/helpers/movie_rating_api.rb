@@ -9,15 +9,11 @@ helpers do
     movie_id = credits['cast'].map { |cast| cast['id'] }
     movie_rating = movie_id.take(15).map { |mov| Tmdb::Movie.detail(mov).vote_average }
     avg_score = movie_rating.inject(:+)/movie_rating.length
-    return avg_score
+    avg_score
   end
 
-  def win(actor_avg2, actor_avg1, first_actor, second_actor)
-    if actor_avg2 > actor_avg1
-      return first_actor
-    else
-      return second_actor
-    end
+  def win(second_actor_avg, first_actor_avg, first_actor, second_actor)
+    first_actor_avg > second_actor_avg ? first_actor : second_actor
   end
 
 end

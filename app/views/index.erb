@@ -1,21 +1,18 @@
 
 <div class="container">
-  <h1>Movie Fight<h1>
-
+  <h1>Movie Fight</h1>
   <a href="/logout">Logout</a><br />
-  <div id = "video">
-    <video width="320" height="240" controls>
-      <source src="movie.mp4" type="video/mp4">
-    </video>
+  <div id = "content">
+    <div id = "video">
+      <video width="550" height="400" controls>
+        <source src="movie.mp4" type="video/mp4">
+        </video>
+      <form id="pick_actors" action="/actors" method="post">
+        <input type="text" placeholder="Choose your 1st Actor" name="firstactor" required="">
+        <input type="text" placeholder="Choose your 2nd Actor" name = "secondactor"required="">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <h1 id="winner"></h1>
   </div>
-
-  <h1>Get a Movie Battle Going</h1>
-  <form id="signup" action="/actors" method="post">
-    <input type="text" placeholder="Choose your 1st Actor" name="firstactor" required="">
-    <input type="text" placeholder="Choose your 2nd Actor" name = "secondactor"required="">
-    <button type="submit">Submit</button>
-  </form>
-
-  <h1 id="winner"></h1>
-
 </div>
