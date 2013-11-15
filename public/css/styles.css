@@ -2,10 +2,11 @@ body {
   background-image: url('../img/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 120%;
+  height: 125%;
   font-family: 'Varela Round', sans-serif;
   text-shadow: 2px 2px 3px #666;
 }
+
 header {
   background-size: cover;
   background-color: #34495e;
@@ -18,7 +19,6 @@ header {
   top: 100px;
   text-align: left;
 }
-
 
 header: h1:first-child {
   font-size: 75px;
@@ -43,16 +43,14 @@ header: h1:first-child {
   text-align: center;
 }
 
-
 #pick_actors {
   box-shadow: 6px 6px 6px black;
   width: 550px;
+  opacity: 0.96;
   border: 1px solid grey;
-  opacity:0.9;
   height: 270px;
   margin: 100px auto 50px auto;
   padding: 20px;
-  top: -100px;
   position: relative;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
@@ -60,6 +58,7 @@ header: h1:first-child {
   -webkit-border-radius: 3px;
   border-radius: 5px;
 }
+
 #pick_actors input{
   margin: 15px 0;
   padding: 10px;
@@ -74,7 +73,6 @@ header: h1:first-child {
 #pick_actors button{
   margin: 40px 10px 0 0;
   position: relative;
-  top: -25px;
   padding: 15px 8px;
   width: 100%;
   border: 1px solid #2493FF;
@@ -101,25 +99,48 @@ header: h1:first-child {
 
 #pick_actors button:active{
   position: relative;
-  top: 3px;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
 }
+
 #video {
   position: relative;
   margin: 20px 0 0;
-  top: 250px;
 }
+
 #player {
   display:none;
 }
+
 #login_info {
   font-size: 40px;
   color: white;
   font-family: 'Doppio One', sans-serif;
 }
+
 #login_link {
   font-size: 40px;
   color: white;
   font-family: 'Doppio One', sans-serif;
+}
+
+#recent_fights {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  width: 550px;
+  padding: 30px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #333;
+  opacity: 0.96;
+  text-align: center;
+}
+
+#recent_fights a {
+  text-decoration: none;
+  color: #06799f;
+}
+
+#recent_fights a:hover {
+  color: #bf7930;
 }
