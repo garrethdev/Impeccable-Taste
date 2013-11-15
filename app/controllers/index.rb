@@ -16,7 +16,7 @@ get '/' do
 
     # If the facebook user id doesn't exist in the database, then add that user
     if User.exists?(:facebook_id => @json['id']) == false
-      User.create facebook_id: @json['id'], first_name: @json['first_name'], last_name: @json['last_name'], username: @json['username'], link: @json['link'], oauth_token: session['access_token'], oauth_secret: "some secret" 
+      User.create facebook_id: @json['id'], first_name: @json['first_name'], last_name: @json['last_name'], username: @json['username'], link: @json['link'], percentage_score: 0.0, total_answered: 0, total_correct: 0
     end
 
     'You are logged in! <a href="/logout">Logout</a>'
@@ -34,7 +34,6 @@ end
 
 get '/logout' do
   session['oauth'] = nil
-  p session['access_token']
   session['access_token'] = nil
   redirect '/'
 end
@@ -45,24 +44,18 @@ get '/callback' do
 end
 
 post '/actors' do
-  @first_actor = params[:firstactor]
-  @second_actor = params[:secondactor]
-  @actors = Actor.all
 
+  # Cache an actor if it does not exist in the database.
+  cache_actor(params[:firstactor]); cache_actor(params[:secondactor])
 
-  @actor_avg1 = movie_rating(@first_actor)
-  @actor_avg2 = movie_rating(@second_actor)
+  @first_actor = Actor.find_by_name(params[:firstactor])
+  @second_actor = Actor.find_by_name(params[:secondactor])
 
-  puts "Actor Avg2"
-  @actor_avg2
+  # Create fight if it doesn't exist in the database.
+  cache_fight(@first_actor, @second_actor)
 
-  puts "Actor Avg1"
-  p @actor_avg1
-
-
-
-  @winner =  win(@actor_avg1, @actor_avg2, @first_actor, @second_actor) + " is the winner"
-
-  puts "Winner"
+  erb :index
+  # @winner =  win(@first_actor.avg_rating, @second_actor.avg_rating, params[:firstactor], params[:secondactor]) + " is the winner"
+  @winner =  win(@first_actor, @second_actor) + " is the winner"
   @winner
 end
