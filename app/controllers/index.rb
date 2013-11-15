@@ -50,10 +50,10 @@ post '/actors' do
   @actors = Actor.all
 
   # Cache an actor if it does not exist in the database.
-  cache_actor(@first_actor_name); actor_cache(@second_actor_name)
+  cache_actor(@first_actor_name); cache_actor(@second_actor_name)
 
   @first_actor = Actor.find_by_name(@first_actor_name)
-  @second_actor = Actor.find_by_name(@first_actor_name)
+  @second_actor = Actor.find_by_name(@second_actor_name)
 
   @actor_avg1 = @first_actor.avg_rating
   @actor_avg2 = @second_actor.avg_rating
