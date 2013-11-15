@@ -2,6 +2,7 @@ class TablesForDatabase < ActiveRecord::Migration
  def change
     create_table(:actors) do |t|
       t.string :name
+      t.string :name_lowercase
       t.integer :avg_rating
     end
     create_table(:users) do |t|
