@@ -13,16 +13,31 @@ helpers do
   end
 
   def cache_actor(actor_name)
-    if Actor.exists?(:name => actor_name) == false
-      Actor.create name: actor_name, avg_rating: movie_rating(actor_name)
+    # Create actor if actor doesn't already exist in database.
+    # Actor.create name: actor_name, avg_rating: movie_rating(actor_name) if Actor.exists?(:name => actor_name)
+    if Actor.exists?(:name_lowercase => actor_name.downcase) == false
+      Actor.create name: actor_name, name_lowercase: actor_name.downcase, avg_rating: movie_rating(actor_name)
     end
   end
 
-  def win(actor_avg2, actor_avg1, first_actor, second_actor)
-    if actor_avg2 > actor_avg1
-      return first_actor
+  def cache_fight(first_actor, second_actor)
+    # first_actor_name = first_actor.name.downcase
+    # second_actor_name = second_actor.name.downcase
+
+    if Fight.exists?(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase)
+      Fight.where(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase).first.increment!(:access_count)
+    elsif Fight.exists?(:first_actor => second_actor.name_lowercase, :second_actor => first_actor.name_lowercase)
+      Fight.where(:first_actor => second_actor.name_lowercase, :second_actor => first_actor.name_lowercase).first.increment!(:access_count)
     else
-      return second_actor
+      Fight.create first_actor: first_actor.name_lowercase, second_actor: second_actor.name_lowercase, access_count: 1
+    end
+  end
+
+  def win(first_actor, second_actor)
+    if second_actor.avg_rating > first_actor.avg_rating
+      return first_actor.name
+    else
+      return second_actor.name
     end
   end
 
