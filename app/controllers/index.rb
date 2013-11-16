@@ -3,9 +3,9 @@ require "net/http"
 require "net/https"
 require "cgi"
 require "json"
-# require_relative 'movie_rating_api'
-get '/' do
 
+
+get '/' do
   if session['access_token']
     # The following lines get basic user info including ID.
     http = Net::HTTP.new "graph.facebook.com", 443
@@ -55,7 +55,6 @@ post '/actors' do
   cache_fight(@first_actor, @second_actor)
 
   erb :index
-  # @winner =  win(@first_actor.avg_rating, @second_actor.avg_rating, params[:firstactor], params[:secondactor]) + " is the winner"
   @winner =  win(@first_actor, @second_actor) + " is the winner"
   @winner
 end
