@@ -92,6 +92,7 @@ DEPENDENCIES
   activesupport
   factory_girl
   faker
+  json
   koala
   pg
   rack-test

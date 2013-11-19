@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-// Submit event for the form button.
-// NOTE: I added a validation to make sure the user enters two different actors.
 $('#pick_actors').on('submit', function(e) {
   $("#player").css("display", "block")
   e.preventDefault();
@@ -42,6 +40,8 @@ $('#pick_actors').on('submit', function(e) {
     $('#winner').html('These people don\'t exist. Please enter some real actors.');
   });
 });
+
+
 
 
 });

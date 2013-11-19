@@ -1,11 +1,21 @@
+
 body {
   background-image: url('../img/background.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 125%;
+/*  background-size: cover;
+*/  height: 100%;
+  background-color: bl
+  height: 700px;
   font-family: 'Varela Round', sans-serif;
   text-shadow: 2px 2px 3px #666;
 }
+
+#iframe {
+  border-radius: 2px;
+  border: 2px solid #2c3e50;
+}
+
+
 
 header {
   background-size: cover;

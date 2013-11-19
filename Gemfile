@@ -8,6 +8,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 gem 'themoviedb'
+gem 'json'
 
 # Use Thin for our web server
 gem 'thin'
