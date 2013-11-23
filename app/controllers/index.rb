@@ -7,20 +7,8 @@ require "json"
 
 get '/' do
   if session['access_token']
-    # The following lines get basic user info including ID.
-    http = Net::HTTP.new "graph.facebook.com", 443
-    request = Net::HTTP::Get.new "/me?access_token=#{session['access_token']}"
-    http.use_ssl = true
-    response = http.request request
-    @json = JSON.parse(response.body)
-
-    # If the facebook user id doesn't exist in the database, then add that user
-    if User.exists?(:facebook_id => @json['id']) == false
-      User.create facebook_id: @json['id'], first_name: @json['first_name'], last_name: @json['last_name'], username: @json['username'], link: @json['link'], percentage_score: 0.0, total_answered: 0, total_correct: 0
-    end
-
-    'You are logged in! <a href="/logout">Logout</a>'
-     erb :index
+    get_user_info
+    erb :index
   else
     erb :login
   end
@@ -46,7 +34,8 @@ end
 post '/actors' do
 
   # Cache an actor if it does not exist in the database.
-  cache_actor(params[:firstactor]); cache_actor(params[:secondactor])
+  cache_actor(params[:firstactor])
+  cache_actor(params[:secondactor])
 
   @first_actor = Actor.find_by_name_lowercase(params[:firstactor].downcase)
   @second_actor = Actor.find_by_name_lowercase(params[:secondactor].downcase)
