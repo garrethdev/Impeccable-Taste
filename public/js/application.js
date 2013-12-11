@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 // Submit event for the form button.
 // NOTE: I added a validation to make sure the user enters two different actors.
 $('#pick_actors').on('submit', function(e) {

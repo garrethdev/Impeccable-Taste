@@ -18,13 +18,12 @@ helpers do
 
   def cache_actor(actor_name)
     if Actor.exists?(:name_lowercase => actor_name.downcase) == false
-      Actor.create name: actor_name, 
-                   name_lowercase: actor_name.downcase, 
+      Actor.create name: actor_name,
+                   name_lowercase: actor_name.downcase,
                    avg_rating: movie_rating(actor_name)
     end
   end
 
-  def fight_exist (         )
 
   def cache_fight(first_actor, second_actor)
 
@@ -33,7 +32,7 @@ helpers do
     # elsif Fight.exists?(second_actor, first_acotr)
     #   return fight(second, first)
     # else
-    #   create_fight first, second 
+    #   create_fight first, second
     # end
 
     if Fight.exists?(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase)
