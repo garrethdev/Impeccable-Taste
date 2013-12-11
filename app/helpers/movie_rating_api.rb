@@ -1,6 +1,7 @@
 helpers do
   def movie_rating(actor)
     result = search_results(actor)
+    console.log("This is a test")
     credits = Tmdb::People.credits(result.first['id'])
     movie_id = credits['cast'].map { |cast| cast['id'] }
     movie_rating = movie_id.take(15).map { |mov| Tmdb::Movie.detail(mov).vote_average }
@@ -17,6 +18,7 @@ helpers do
   end
 
   def cache_actor(actor_name)
+    puts "This is hit"
     if Actor.exists?(:name_lowercase => actor_name.downcase) == false
       Actor.create name: actor_name,
                    name_lowercase: actor_name.downcase,
@@ -27,18 +29,10 @@ helpers do
 
   def cache_fight(first_actor, second_actor)
 
-    # if Fight.exists?(first_acotr, second_actor)
-    #   return fight(first, second)
-    # elsif Fight.exists?(second_actor, first_acotr)
-    #   return fight(second, first)
-    # else
-    #   create_fight first, second
-    # end
-
     if Fight.exists?(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase)
-      Fight.where(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase).first.increment!(:access_count)
+      Fight.where(:first_actor => first_actor.name_lowercase, :second_actor => second_actor.name_lowercase)
     elsif Fight.exists?(:first_actor => second_actor.name_lowercase, :second_actor => first_actor.name_lowercase)
-      Fight.where(:first_actor => second_actor.name_lowercase, :second_actor => first_actor.name_lowercase).first.increment!(:access_count)
+      Fight.where(:first_actor => second_actor.name_lowercase, :second_actor => first_actor.name_lowercase)
     else
       Fight.create first_actor: first_actor.name_lowercase, second_actor: second_actor.name_lowercase, access_count: 1
     end
@@ -55,7 +49,6 @@ helpers do
     http.use_ssl  = true
     response      = http.request request
     json          = JSON.parse(response.body)
-
     cache_facebook_user(json)
   end
 
