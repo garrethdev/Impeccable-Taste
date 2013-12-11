@@ -18,7 +18,7 @@ body {
 
 
 header {
-  background-size: cover;
+  width: 4000px;
   background-color: #34495e;
   color: white;
   font-size: 60px;
@@ -26,18 +26,16 @@ header {
   opacity: .95;
   border-radius: 4px;
   box-shadow: 3px 3px 3px black;
-  top: 100px;
+  position: relative;
   text-align: left;
 }
 
-header: h1:first-child {
-  font-size: 75px;
-  font-family: 'pf-din';
-  color: #333;
-  font-weight:bold;
-}
+
 
 #logout {
+  position: absolute;
+  top: 30px;
+  left: 1700px;
   font-size: 30px;
   text-decoration: none;
   color: #06799f;
@@ -132,20 +130,24 @@ header: h1:first-child {
 #recent_fights {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
-  width: 580px;
+  width: 100%;
   margin: 0 auto;
-  border-radius: 5px;
+  border-radius: 1px;
   box-shadow: 6px 6px 6px black;
   opacity: 0.96;
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  left:0;
 }
 
-#recent_fights a {
+#recent_fights h3 {
   text-decoration: none;
+  text-align: left;
   color: #06799f;
 }
 
-#recent_fights a:hover {
+#recent_fights h3:hover {
   color: #bf7930;
 }
 
