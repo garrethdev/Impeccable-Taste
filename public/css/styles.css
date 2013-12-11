@@ -128,23 +128,27 @@ header {
 }
 
 #recent_fights {
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
+  background-color: #232323;
   width: 100%;
   margin: 0 auto;
+  opacity: .98;
   border-radius: 1px;
   box-shadow: 6px 6px 6px black;
-  opacity: 0.96;
   text-align: center;
   position: fixed;
   bottom: 0;
   left:0;
+  height: 40px;
 }
 
 #recent_fights h3 {
   text-decoration: none;
   text-align: left;
-  color: #06799f;
+  color: #ecf0f1;
+  width: 150px;
+  position: relative;
+  bottom: 5px;
+  left: 10px;
 }
 
 #recent_fights h3:hover {
